@@ -1,8 +1,6 @@
 #include "aaronia_sdr.h"
 #include "common/utils.h"
 
- #include <iostream>
-
 
 #define SPECTRAN_SAMPLERATE_46M 46080000
 #define SPECTRAN_SAMPLERATE_92M 92160000
@@ -238,27 +236,6 @@ got_device:
         throw satdump_exception("Could not start Aaronia device!");
 
 
-    logger->info("Waiting for device state AARTSAAPI_RUNNING");
-    while (AARTSAAPI_GetDeviceState(&aaronia_device) != AARTSAAPI_RUNNING)
-    {
-#ifdef _WIN32
-        Sleep(100);
-#else
-        usleep(100000);
-#endif
-        logger->info("Still waiting");
-    }
-
-
-    // Wait
-
-    logger->info("Config health: 0x%x",AARTSAAPI_ConfigHealth(&aaronia_device, &config));
-    logger->info("Get device state: 0x%x", AARTSAAPI_GetDeviceState(&aaronia_device));
-
-    int32_t num = -1;
-    AARTSAAPI_AvailPackets(&aaronia_device, 0,&num);
-    logger->info("Get available packages: %d", num);
-
     logger->info("Waiting for device to stream...");
 
     AARTSAAPI_Packet packet;
@@ -268,14 +245,11 @@ got_device:
 #else
         usleep(1000);
 #endif
-    logger->info("Consuming first package...");
-    AARTSAAPI_ConsumePackets(&aaronia_device, 0, 1);
+
     logger->info("Started Aaronia Device!");
 
     thread_should_run = true;
     work_thread = std::thread(&AaroniaSource::mainThread, this);
-    logger->info("Worker thread initialised");
-
 }
 
 void AaroniaSource::stop()
