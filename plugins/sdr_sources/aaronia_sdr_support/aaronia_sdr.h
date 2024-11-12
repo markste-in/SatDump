@@ -49,26 +49,14 @@ protected:
 
         while (thread_should_run)
         {
-            logger->info("Get device state: 0x%x", AARTSAAPI_GetDeviceState(&aaronia_device));
-
-            int32_t num = -1;
-            AARTSAAPI_AvailPackets(&aaronia_device, 0,&num);
-            logger->info("Get available packages: %d", num);
-
-
-
-            logger->info("Waiting for non-empty package ...");
-
             while ((res = AARTSAAPI_GetPacket(&aaronia_device, 0, 0, &packet)) == AARTSAAPI_EMPTY)
 #ifdef _WIN32
                 Sleep(1);
 #else
                 usleep(1000);
 #endif
-            logger->info("Got  non-empty package with code %x", res);
             if (res == AARTSAAPI_OK)
             {
-                logger->info("AARTSAAPI_OK :  got a packet ...");
                 int cnt = packet.num;
 
                 if (cnt <= 0)
@@ -96,8 +84,6 @@ protected:
 
                 AARTSAAPI_ConsumePackets(&aaronia_device, 0, 1);
             }
-            else
-                AARTSAAPI_ConsumePackets(&aaronia_device, 0, 1);
         }
     }
 
