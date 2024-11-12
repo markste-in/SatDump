@@ -43,7 +43,6 @@ protected:
     bool thread_should_run = false;
     void mainThread()
     {
-        logger->info("Inside mainThread ...");
         AARTSAAPI_Packet packet;
         AARTSAAPI_Result res;
 
