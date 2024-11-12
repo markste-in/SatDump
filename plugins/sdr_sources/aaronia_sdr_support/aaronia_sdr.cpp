@@ -235,7 +235,7 @@ got_device:
     if (AARTSAAPI_StartDevice(&aaronia_device) != AARTSAAPI_OK)
         throw satdump_exception("Could not start Aaronia device!");
 
-
+    // Wait
     logger->info("Waiting for device to stream...");
 
     AARTSAAPI_Packet packet;
@@ -245,7 +245,6 @@ got_device:
 #else
         usleep(1000);
 #endif
-
     logger->info("Started Aaronia Device!");
 
     thread_should_run = true;
