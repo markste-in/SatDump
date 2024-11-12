@@ -23,6 +23,8 @@ public:
     static void registerSources(const dsp::RegisterDSPSampleSourcesEvent &evt)
     {
         evt.dsp_sources_registry.insert({AaroniaSource::getID(), {AaroniaSource::getInstance, AaroniaSource::getAvailableSources}});
+        logger->info("AaroniaSource::getID()");
+        logger->info(AaroniaSource::getID());
     }
 };
 
