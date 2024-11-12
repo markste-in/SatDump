@@ -54,6 +54,7 @@ protected:
 #else
                 usleep(1000);
 #endif
+
             if (res == AARTSAAPI_OK)
             {
                 int cnt = packet.num;

@@ -1,7 +1,6 @@
 #include "aaronia_sdr.h"
 #include "common/utils.h"
 
-
 #define SPECTRAN_SAMPLERATE_46M 46080000
 #define SPECTRAN_SAMPLERATE_92M 92160000
 #define SPECTRAN_SAMPLERATE_122M 122880000
