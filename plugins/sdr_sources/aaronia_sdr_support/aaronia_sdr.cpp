@@ -156,16 +156,15 @@ void AaroniaSource::start()
     std::wstring device_type;
 
     // Try to find the ECO first
-    for (uint64_t i = 0; !foundDevice && 
-         AARTSAAPI_EnumDevice(&aaronia_handle, L"spectranv6eco", i, &aaronia_dinfo) == AARTSAAPI_OK; i++){
+    for (uint64_t i = 0; !foundDevice && AARTSAAPI_EnumDevice(&aaronia_handle, L"spectranv6eco", i, &aaronia_dinfo) == AARTSAAPI_OK; i++)
+    {
         device_type  = L"spectranv6eco";
         foundDevice  = true;
     }
     // If no ECO was found we try the PLUS next
     if (!foundDevice)
     {
-        for (uint64_t i = 0; !foundDevice && 
-             AARTSAAPI_EnumDevice(&aaronia_handle, L"spectranv6", i, &aaronia_dinfo) == AARTSAAPI_OK; i++)
+        for (uint64_t i = 0; !foundDevice && AARTSAAPI_EnumDevice(&aaronia_handle, L"spectranv6", i, &aaronia_dinfo) == AARTSAAPI_OK; i++)
         {
             device_type = L"spectranv6";
             foundDevice = true;
